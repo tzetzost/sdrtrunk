@@ -17,44 +17,32 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * *****************************************************************************
  */
-package io.github.dsheirer.map;
 
-import io.github.dsheirer.map.swingx.painter.Painter;
+/*
+ * DefaultTileFactory.java
+ *
+ * Created on June 27, 2006, 2:20 PM
+ *
+ * To change this template, choose Tools | Template Manager
+ * and open the template in the editor.
+ */
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
+package io.github.dsheirer.map.swingx.mapviewer;
 
 /**
- * Paints a selection rectangle
- * @author Martin Steiger
+ * A tile factory which configures itself using a TileFactoryInfo object and uses a Google Maps like mercator
+ * projection.
+ * @author joshy
  */
-public class SelectionPainter implements Painter<Object>
+public class DefaultTileFactory extends AbstractTileFactory
 {
-	private Color fillColor = new Color(128, 192, 255, 128);
-	private Color frameColor = new Color(0, 0, 255, 128);
-
-	private SelectionAdapter adapter;
-	
 	/**
-	 * @param adapter the selection adapter
+	 * Creates a new instance of DefaultTileFactory using the spcified TileFactoryInfo
+	 * @param info a TileFactoryInfo to configure this TileFactory
 	 */
-	public SelectionPainter(SelectionAdapter adapter)
+	public DefaultTileFactory(TileFactoryInfo info)
 	{
-		this.adapter = adapter;
+		super(info);
 	}
 
-	@Override
-	public void paint(Graphics2D g, Object t, int width, int height)
-	{
-		Rectangle rc = adapter.getRectangle();
-		
-		if (rc != null)
-		{
-			g.setColor(frameColor);
-			g.draw(rc);
-			g.setColor(fillColor);
-			g.fill(rc);
-		}
-	}
 }

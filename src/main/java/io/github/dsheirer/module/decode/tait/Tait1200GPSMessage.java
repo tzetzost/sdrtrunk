@@ -1,7 +1,7 @@
 /*
  * ******************************************************************************
  * sdrtrunk
- * Copyright (C) 2014-2018 Dennis Sheirer
+ * Copyright (C) 2014-2019 Dennis Sheirer
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,10 +22,10 @@ package io.github.dsheirer.module.decode.tait;
 import io.github.dsheirer.bits.BinaryMessage;
 import io.github.dsheirer.edac.CRC;
 import io.github.dsheirer.identifier.Identifier;
+import io.github.dsheirer.map.swingx.mapviewer.GeoPosition;
 import io.github.dsheirer.message.Message;
 import io.github.dsheirer.module.decode.tait.identifier.TaitIdentifier;
 import io.github.dsheirer.protocol.Protocol;
-import org.jdesktop.swingx.mapviewer.GeoPosition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

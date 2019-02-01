@@ -17,44 +17,32 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * *****************************************************************************
  */
-package io.github.dsheirer.map;
+package io.github.dsheirer.map.swingx.input;
 
-import io.github.dsheirer.map.swingx.painter.Painter;
+import io.github.dsheirer.map.swingx.JXMapViewer;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 
 /**
- * Paints a selection rectangle
- * @author Martin Steiger
+ * zooms using the mouse wheel on the view center
+ * @author joshy
  */
-public class SelectionPainter implements Painter<Object>
+public class ZoomMouseWheelListenerCenter implements MouseWheelListener
 {
-	private Color fillColor = new Color(128, 192, 255, 128);
-	private Color frameColor = new Color(0, 0, 255, 128);
-
-	private SelectionAdapter adapter;
+	private JXMapViewer viewer;
 	
 	/**
-	 * @param adapter the selection adapter
+	 * @param viewer the jxmapviewer
 	 */
-	public SelectionPainter(SelectionAdapter adapter)
+	public ZoomMouseWheelListenerCenter(JXMapViewer viewer)
 	{
-		this.adapter = adapter;
+		this.viewer = viewer;
 	}
 
 	@Override
-	public void paint(Graphics2D g, Object t, int width, int height)
+	public void mouseWheelMoved(MouseWheelEvent e)
 	{
-		Rectangle rc = adapter.getRectangle();
-		
-		if (rc != null)
-		{
-			g.setColor(frameColor);
-			g.draw(rc);
-			g.setColor(fillColor);
-			g.fill(rc);
-		}
+		viewer.setZoom(viewer.getZoom() + e.getWheelRotation());
 	}
 }

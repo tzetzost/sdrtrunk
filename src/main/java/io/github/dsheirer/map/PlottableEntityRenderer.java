@@ -1,7 +1,7 @@
 /*
  * ******************************************************************************
  * sdrtrunk
- * Copyright (C) 2014-2018 Dennis Sheirer
+ * Copyright (C) 2014-2019 Dennis Sheirer
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,8 +23,8 @@ import io.github.dsheirer.alias.Alias;
 import io.github.dsheirer.alias.AliasList;
 import io.github.dsheirer.alias.AliasModel;
 import io.github.dsheirer.icon.IconManager;
-import org.jdesktop.swingx.JXMapViewer;
-import org.jdesktop.swingx.mapviewer.GeoPosition;
+import io.github.dsheirer.map.swingx.JXMapViewer;
+import io.github.dsheirer.map.swingx.mapviewer.GeoPosition;
 
 import javax.swing.ImageIcon;
 import java.awt.BasicStroke;

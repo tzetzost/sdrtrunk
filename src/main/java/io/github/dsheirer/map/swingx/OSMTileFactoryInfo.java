@@ -17,44 +17,37 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * *****************************************************************************
  */
-package io.github.dsheirer.map;
 
-import io.github.dsheirer.map.swingx.painter.Painter;
+package io.github.dsheirer.map.swingx;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
+import io.github.dsheirer.map.swingx.mapviewer.TileFactoryInfo;
 
 /**
- * Paints a selection rectangle
- * @author Martin Steiger
+ * Uses OpenStreetMap
+ * @author Martin Dummer
  */
-public class SelectionPainter implements Painter<Object>
+public class OSMTileFactoryInfo extends TileFactoryInfo
 {
-	private Color fillColor = new Color(128, 192, 255, 128);
-	private Color frameColor = new Color(0, 0, 255, 128);
+	private static final int max = 19;
 
-	private SelectionAdapter adapter;
-	
 	/**
-	 * @param adapter the selection adapter
+	 * Default constructor
 	 */
-	public SelectionPainter(SelectionAdapter adapter)
+	public OSMTileFactoryInfo()
 	{
-		this.adapter = adapter;
+		super("OpenStreetMap", 
+				1, max - 2, max, 
+				256, true, true, 					// tile size is 256 and x/y orientation is normal
+				"http://tile.openstreetmap.org",
+				"x", "y", "z");						// 5/15/10.png
 	}
 
 	@Override
-	public void paint(Graphics2D g, Object t, int width, int height)
+	public String getTileUrl(int x, int y, int zoom)
 	{
-		Rectangle rc = adapter.getRectangle();
-		
-		if (rc != null)
-		{
-			g.setColor(frameColor);
-			g.draw(rc);
-			g.setColor(fillColor);
-			g.fill(rc);
-		}
+		zoom = max - zoom;
+		String url = this.baseURL + "/" + zoom + "/" + x + "/" + y + ".png";
+		return url;
 	}
+
 }

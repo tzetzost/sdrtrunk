@@ -1,6 +1,7 @@
-/*******************************************************************************
+/*
+ * ******************************************************************************
  * sdrtrunk
- * Copyright (C) 2014-2017 Dennis Sheirer
+ * Copyright (C) 2014-2019 Dennis Sheirer
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,22 +15,22 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
- *
- ******************************************************************************/
+ * *****************************************************************************
+ */
 package io.github.dsheirer.map;
 
 import io.github.dsheirer.alias.AliasModel;
 import io.github.dsheirer.icon.IconManager;
+import io.github.dsheirer.map.swingx.JXMapViewer;
+import io.github.dsheirer.map.swingx.OSMTileFactoryInfo;
+import io.github.dsheirer.map.swingx.input.PanKeyListener;
+import io.github.dsheirer.map.swingx.input.ZoomMouseWheelListenerCursor;
+import io.github.dsheirer.map.swingx.mapviewer.DefaultTileFactory;
+import io.github.dsheirer.map.swingx.mapviewer.GeoPosition;
+import io.github.dsheirer.map.swingx.mapviewer.TileFactoryInfo;
 import io.github.dsheirer.settings.MapViewSetting;
 import io.github.dsheirer.settings.SettingsManager;
 import net.miginfocom.swing.MigLayout;
-import org.jdesktop.swingx.JXMapViewer;
-import org.jdesktop.swingx.OSMTileFactoryInfo;
-import org.jdesktop.swingx.input.PanKeyListener;
-import org.jdesktop.swingx.input.ZoomMouseWheelListenerCursor;
-import org.jdesktop.swingx.mapviewer.DefaultTileFactory;
-import org.jdesktop.swingx.mapviewer.GeoPosition;
-import org.jdesktop.swingx.mapviewer.TileFactoryInfo;
 
 import javax.swing.JPanel;
 import java.awt.EventQueue;

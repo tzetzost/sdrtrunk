@@ -17,44 +17,36 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * *****************************************************************************
  */
-package io.github.dsheirer.map;
 
-import io.github.dsheirer.map.swingx.painter.Painter;
+/*
+ * WaypointRenderer.java
+ *
+ * Created on March 30, 2006, 5:56 PM
+ *
+ * To change this template, choose Tools | Template Manager
+ * and open the template in the editor.
+ */
 
-import java.awt.Color;
+package io.github.dsheirer.map.swingx.mapviewer;
+
+import io.github.dsheirer.map.swingx.JXMapViewer;
+
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 
 /**
- * Paints a selection rectangle
- * @author Martin Steiger
+ * A interface that draws waypoints. Implementations of WaypointRenderer can
+ * be set on a WayPointPainter to draw waypoints on a JXMapViewer
+ * @param <W> the waypoint type
+ * @author joshua.marinacci@sun.com
  */
-public class SelectionPainter implements Painter<Object>
+public interface WaypointRenderer<W>
 {
-	private Color fillColor = new Color(128, 192, 255, 128);
-	private Color frameColor = new Color(0, 0, 255, 128);
-
-	private SelectionAdapter adapter;
-	
-	/**
-	 * @param adapter the selection adapter
-	 */
-	public SelectionPainter(SelectionAdapter adapter)
-	{
-		this.adapter = adapter;
-	}
-
-	@Override
-	public void paint(Graphics2D g, Object t, int width, int height)
-	{
-		Rectangle rc = adapter.getRectangle();
-		
-		if (rc != null)
-		{
-			g.setColor(frameColor);
-			g.draw(rc);
-			g.setColor(fillColor);
-			g.fill(rc);
-		}
-	}
+    /**
+     * paint the specified waypoint on the specified map and graphics context
+     * @param g the graphics2D object 
+     * @param map the map
+     * @param waypoint the waypoint
+     */
+    public void paintWaypoint(Graphics2D g, JXMapViewer map, W waypoint);
+    
 }
