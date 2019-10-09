@@ -24,9 +24,10 @@ package io.github.dsheirer.audio.codec.mbe;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.base.Joiner;
 import io.github.dsheirer.module.decode.p25.audio.VoiceFrame;
 
+import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -63,17 +64,42 @@ public class MBECallSequenceReader
 
     public static void main(String[] args)
     {
-        Path path = Path.of("/home/denny/SDRTrunk/recordings/20190706063149_154250000_7_TS1_65084_6591001.mbe");
+//        Path directory = Path.of("/home/denny/Documents/TMR/APCO25/AMBE Codec/MBE Dongle Recordings");
+        Path directory = Path.of("/home/denny/Documents/TMR/APCO25/IMBE Codec/MBE Dongle Generated Recordings");
 
-        try
+        if(Files.isDirectory(directory))
         {
-            List<String> frames = MBECallSequenceReader.getAudioFrames(path);
+            File[] files = directory.toFile().listFiles(new FileFilter()
+            {
+                @Override
+                public boolean accept(File pathname)
+                {
+                    return pathname.toString().endsWith(".mbe");
+                }
+            });
 
-            Files.writeString(Path.of("/home/denny/SDRTrunk/recordings/mbe_frames.txt"), Joiner.on("\",\n\"").join(frames));
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
+            for(File file: files)
+            {
+                System.out.println("Converting file: " + file.toString());
+                try
+                {
+                    List<String> frames = MBECallSequenceReader.getAudioFrames(file.toPath());
+
+                    StringBuilder sb = new StringBuilder();
+
+                    for(String frame: frames)
+                    {
+                        sb.append("\"").append(frame).append("\",");
+                    }
+
+                    Path output = Path.of(file.toString().replace(".mbe", "_frames.txt"));
+                    Files.writeString(output, sb.toString());
+                }
+                catch(Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }

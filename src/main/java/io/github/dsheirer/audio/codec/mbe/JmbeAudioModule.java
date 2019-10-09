@@ -60,7 +60,7 @@ public abstract class JmbeAudioModule extends AbstractAudioModule implements Lis
         loadConverter();
     }
 
-    protected IAudioCodec getAudioCodec()
+    public IAudioCodec getAudioCodec()
     {
         return mAudioCodec;
     }

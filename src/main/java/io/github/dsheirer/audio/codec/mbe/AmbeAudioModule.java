@@ -41,6 +41,9 @@ public abstract class AmbeAudioModule extends JmbeAudioModule
             if(getAudioCodec() != null)
             {
                 mLog.info("AMBE CODEC successfully loaded - P25-2/DMR/NXDN audio will be available");
+
+                //Set AMBE audio gain
+                getAudioCodec().setAudioGain(16.0f);
             }
             else
             {

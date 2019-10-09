@@ -121,6 +121,9 @@ public class P25TrafficChannelManager extends Module implements IDecodeEventProv
         {
             mIgnoreDataCalls = ((DecodeConfigP25Phase1)parentChannel.getDecodeConfiguration()).getIgnoreDataCalls();
         }
+
+        createPhase1TrafficChannels();
+        createPhase1TrafficChannels();
     }
 
     /**
@@ -254,9 +257,6 @@ public class P25TrafficChannelManager extends Module implements IDecodeEventProv
     private void processPhase1ChannelGrant(APCO25Channel apco25Channel, ServiceOptions serviceOptions,
                                     IdentifierCollection identifierCollection, Opcode opcode, long timestamp)
     {
-        //This will only happen on the first call
-        createPhase1TrafficChannels();
-
         P25ChannelGrantEvent event = mChannelGrantEventMap.get(apco25Channel);
 
         if(event != null && isSameCall(identifierCollection, event.getIdentifierCollection()))
@@ -370,9 +370,6 @@ public class P25TrafficChannelManager extends Module implements IDecodeEventProv
     private void processPhase2ChannelGrant(APCO25Channel apco25Channel, ServiceOptions serviceOptions,
                                            IdentifierCollection identifierCollection, Opcode opcode, long timestamp)
     {
-        //This will only happen on the first call
-        createPhase2TrafficChannels();
-
         if(mPhase2ScrambleParameters != null && identifierCollection instanceof MutableIdentifierCollection)
         {
             ((MutableIdentifierCollection)identifierCollection).silentUpdate(ScrambleParameterIdentifier.create(mPhase2ScrambleParameters));
